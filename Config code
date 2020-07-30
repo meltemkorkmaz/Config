@@ -6,46 +6,27 @@ import java.util.Properties;
 
 public class Config {
     String[] data = new String[3];
-    public void getPropValues() {
+    public String[] getPropValues() {
         try {
             Properties prop = new Properties();
             OutputStream output = new FileOutputStream("config.properties");
 
             if (output == null) {
                 System.out.println("Couldnt find any config.properties");
-                return;
             }
 
             prop.setProperty("url", "jdbc:mysql://localhost:3306/deneme?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
             prop.setProperty("user", "root");
-            prop.setProperty("password", "meltem7997");
-
-            prop.store(output, null);
-
-            System.out.println(prop);
-
-
-        } catch (IOException io) {
-            io.printStackTrace();
-        }
-    }
-
-    public String[] loadValues() {
-
-        try {
-            Properties prop = new Properties();
-            InputStream input = new FileInputStream("config.properties");
-            if (input == null) {
-                System.out.println("Couldnt find any config.properties");
-            }
-            prop.load(input);
+            prop.setProperty("password", "1234");
 
             data[0] = prop.getProperty("url");
             data[1] = prop.getProperty("user");
             data[2] = prop.getProperty("password");
 
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            prop.store(output, null);
+
+        } catch (IOException io) {
+            io.printStackTrace();
         }
         return data;
     }
